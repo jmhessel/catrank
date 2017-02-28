@@ -26,9 +26,6 @@ pip install -r requirements.txt
 If you want to score a cute cat or, in this case, a dog, according to
 the /r/aww community, you can do...
 
-<img src="https://github.com/jmhessel/catrank/blob/master/examples/bodhi.jpg?raw=true" style="width:100px;">
-
-
 ```
 python score_example.py examples/bodhi.jpg aww
 ```
