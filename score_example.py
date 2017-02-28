@@ -10,6 +10,7 @@ from utils import *
 from keras.applications.resnet50 import ResNet50
 from keras.models import Sequential, Model
 from keras.layers import Flatten
+from numpy.linalg import norm
 from sklearn.preprocessing import normalize
 from scipy.stats import percentileofscore as pos
 
@@ -83,7 +84,7 @@ def main():
     
     #Extract image features...
     image_feats = get_image_feats(images)
-    image_feats = normalize(image_feats)
+    image_feats = image_feats/norm(image_feats, axis=1, ord=2)[:,None]
     
     if multimodal:
         print("Extracting text features...")
