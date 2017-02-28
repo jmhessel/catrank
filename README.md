@@ -86,7 +86,7 @@ and comparing to the previous output.
 ## I want to train my own models!
 
 If you want to train your own models, you'll need to get the datasets
-that these were trained on, which are not in the repo. They are
+that these were trained on, which are not in this repo. They are
 available for download
 [here](https://www.cs.cornell.edu/~jhessel/cats/cats.html).
 
