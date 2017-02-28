@@ -23,21 +23,20 @@ pip install -r requirements.txt
 
 ## How do I score images?
 
-If you want to score a cute cat or, in this case, a dog, according to
-the /r/aww community, you can do...
+If you want to score according to the /r/aww community
 
 ```
 python score_example.py examples/bodhi.jpg aww
 ```
 
-The output of this is:
+which outputs:
 ```
 examples/bodhi.jpg		34.8/100
 ```
 
 the first column is the filename, and the second column is the score
 out of 100 for the image (higher is better). The score is the
-percentile of the image on a test split.
+percentile of the image's score on a test split.
 
 ## How do I score images plus their captions?
 
