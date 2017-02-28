@@ -1,0 +1,3 @@
+examples/bodhi.jpg
+examples/lizzy.jpg
+examples/taz.jpg
