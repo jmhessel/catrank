@@ -17,8 +17,9 @@ more about the technical details, check out the project page and paper
 
 If you want to score a cute cat or dog according to the /r/aww
 community, you can do...
-
-<img src="https://github.com/jmhessel/catrank/blob/master/examples/bodhi.jpg?raw=true">
+<center>
+<img src="https://github.com/jmhessel/catrank/blob/master/examples/bodhi.jpg?raw=true" style="width:240px">
+</center>
 
 ```
 python score_example.py examples/bodhi.jpg aww
