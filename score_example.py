@@ -48,6 +48,13 @@ def main():
     
     #should we use the multimodal model? Or just images?
     multimodal = args.caption != ""
+
+    valid_models = set(['aww','pics','cats',
+                        'FoodPorn','RedditLaqueristas','MakeupAddiction'])
+    if args.model not in valid_models:
+        print("{} was not in the set of valid models {}".format(args.model,
+                                                                valid_models))
+        quit()
     
     #Load image and caption list
     if args.list_mode:
@@ -64,7 +71,6 @@ def main():
     extra = 'mm' if multimodal else "uni"
     image_weight_fp = "pretrained_models/{}_{}_resnet50_weights.txt".format(args.model, extra)
     image_weights = np.array([float(x) for x in load_lines(image_weight_fp)])
-    print(image_weights.shape)
     if multimodal:
         text_weight_fp = "pretrained_models/{}_{}_text_weights.txt".format(args.model, extra)
         vocab, text_weights = zip(*[x.split() for x in load_lines(text_weight_fp)])
@@ -77,17 +83,14 @@ def main():
     
     #Extract image features...
     image_feats = get_image_feats(images)
-
+    image_feats = normalize(image_feats)
+    
     if multimodal:
-        #normalize image features for the multimodal model
-        image_feats = normalize(image_feats)
         print("Extracting text features...")
         captions = [preprocess_caption(x) for x in captions]
         text_feats = captions_to_matrix(captions, vocab)
 
     #compute the final scores as a simple dot product
-    print(image_feats.shape)
-    print(image_weights.shape)
     scores = image_feats.dot(image_weights)
     if multimodal:
         scores += text_feats.dot(text_weights)
@@ -95,8 +98,16 @@ def main():
     scores = scores.flatten()
     if multimodal:
         for img, cap, sc in zip(images, captions, scores):
-            print("{}\t{}\t{:.3f}/100".format(img, cap, pos(id2score.values(), sc)))
+            if len(cap) > 27:
+                cap = cap[:27] + "..."
+            if len(img) > 27:
+                img = img[:27] + "..."
+            print("{:<30}\t{:<30}\t{:.1f}/100".format(img, cap, pos(id2score.values(), sc)))
+    else:
+        for img, sc in zip(images, scores):
+            if len(img) > 27:
+                img = img[:27] + "..."
+            print("{:<30}\t{:.1f}/100".format(img, pos(id2score.values(), sc)))
 
 if __name__ == '__main__':
     main()
-    
