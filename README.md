@@ -13,13 +13,21 @@ these communities, you've come to the right place! If you want to read
 more about the technical details, check out the project page and paper
 [here](https://www.cs.cornell.edu/~jhessel/cats/cats.html).
 
-## How do I score new images?
+## What is required to run this package?
 
-If you want to score a cute cat or dog according to the /r/aww
-community, you can do...
-<center>
-<img src="https://github.com/jmhessel/catrank/blob/master/examples/bodhi.jpg?raw=true" style="width:240px">
-</center>
+To install requirements, run
+
+```
+pip install -r requirements.txt
+```
+
+## How do I score images?
+
+If you want to score a cute cat or, in this case, a dog, according to
+the /r/aww community, you can do...
+
+<img src="https://github.com/jmhessel/catrank/blob/master/examples/bodhi.jpg?raw=true" style="width:100px;">
+
 
 ```
 python score_example.py examples/bodhi.jpg aww
@@ -31,11 +39,10 @@ examples/bodhi.jpg		34.8/100
 ```
 
 the first column is the filename, and the second column is the score
-out of 100 for the image (higher is better, so I guess my dog wouldn't
-get upvoted too much!). The score is the percentile of the image among
-the test split these models are trained on. If you're interested in
-knowing how accurate the models here are over their test split, you
-can check out the [pretrained models README]()
+out of 100 for the image (higher is better). The score is the
+percentile of the image on a test split.
+
+## How do I score images plus their captions?
 
 If you want to score a cat alongside a caption according to the
 /r/cats community, you can do
@@ -49,13 +56,14 @@ which outputs
 examples/taz.jpg		please dont sit on me		55.8/100
 ```
 
-There are also some simple extentions. If you want to do score many
-images/captions at once, you can use `--list_mode True`; in this case,
-the image and caption arguments are assumed to be text files. The
-image text file has one filename per line, and the caption text file
-has one caption per line. The first line of the image file should
-correspond to the first line of the caption file, and so on. As an
-example, you can run
+## How do I score lots of images/captions?
+
+If you want to do score many images/captions at once, you can use
+`--list_mode True`; in this case, the image and caption arguments are
+assumed to be text files. The image text file has one filename per
+line, and the caption text file has one caption per line. The first
+line of the image file should correspond to the first line of the
+caption file, and so on. For example, you can run
 
 ```
 python score_example.py examples/example_image_list.txt --caption examples/example_caption_list.txt cats --list_mode True
@@ -70,8 +78,8 @@ examples/taz.jpg              	please dont sit on me         	55.8/100
 
 Unsurprisingly, the model doesn't like a dog (Bodhi) being posted in
 /r/cats, though the model likes the story about an elderly cat
-(Lizzy)! As an interesting experiment, you can check the effect the captions
-had by running
+(Lizzy). As an interesting experiment, you can check the effect the
+captions had on the scores by running
 
 ```
 python score_example.py examples/example_image_list.txt cats --list_mode True
@@ -86,7 +94,7 @@ that these were trained on, which are not in the repo. They are
 available for download
 [here](https://www.cs.cornell.edu/~jhessel/cats/cats.html).
 
-## Citation and Contact
+## Citation and contact
 
 If you find the models here useful, please cite our paper!
 
