@@ -68,7 +68,7 @@ def main():
             captions = [args.caption]
 
     #Load model weights...
-    print("Loading model paramters...")
+    print("Loading model parameters...")
     extra = 'mm' if multimodal else "uni"
     image_weight_fp = "pretrained_models/{}_{}_resnet50_weights.txt".format(args.model, extra)
     image_weights = np.array([float(x) for x in load_lines(image_weight_fp)])
