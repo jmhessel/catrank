@@ -98,7 +98,7 @@ If you find the models here useful, please cite our paper!
 @inproceedings{hessel2017cats,
 	title={Cats and Captions vs. Creators and the Clock: Comparing Multimodal Content to Context in Predicting Relative Popularity},
 	author={Hessel, Jack and Lee, Lillian and Mimno, David},
-	booktitle={Proceedings of the 26th International Conference on World Wide Web},
+	booktitle={Proceedings of the 26th International Conference on the World Wide Web},
 	year={2017},
 	organization={International World Wide Web Conferences Steering Committee}
 }
