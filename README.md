@@ -54,7 +54,7 @@ examples/taz.jpg		please dont sit on me		55.8/100
 
 ## How do I score lots of images/captions?
 
-If you want to do score many images/captions at once, you can use
+If you want to score many images/captions at once, you can use
 `--list_mode True`; in this case, the image and caption arguments are
 assumed to be text files. The image text file has one filename per
 line, and the caption text file has one caption per line. The first
