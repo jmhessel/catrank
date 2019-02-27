@@ -37,11 +37,11 @@ def get_image_feats(images):
     base_model = ResNet50()
     base_model.trainable = False
     image_model = Sequential()
-    image_model.add(Model(input = base_model.input,
-                          output=base_model.get_layer('avg_pool').output))
-    image_model.add(Flatten())
+    image_model.add(Model(inputs=base_model.input,
+                          outputs=base_model.get_layer('avg_pool').output))
     gen = image_generator(images, 32)
-    feats = image_model.predict_generator(gen, len(images))
+    feats = image_model.predict_generator(gen, int(np.ceil(len(images) / 32)))
+    feats = feats[:len(images),:]
     return feats
     
 def main():
@@ -85,7 +85,6 @@ def main():
     #Extract image features...
     image_feats = get_image_feats(images)
     image_feats = image_feats/norm(image_feats, axis=1, ord=2)[:,None]
-    
     if multimodal:
         print("Extracting text features...")
         captions = [preprocess_caption(x) for x in captions]
@@ -97,18 +96,19 @@ def main():
         scores += text_feats.dot(text_weights)
 
     scores = scores.flatten()
+    
     if multimodal:
         for img, cap, sc in zip(images, captions, scores):
             if len(cap) > 27:
                 cap = cap[:27] + "..."
             if len(img) > 27:
                 img = img[:27] + "..."
-            print("{:<30}\t{:<30}\t{:.1f}/100".format(img, cap, pos(id2score.values(), sc)))
+            print("{:<30}\t{:<30}\t{:.1f}/100".format(img, cap, pos(np.array(list(id2score.values())), sc)))
     else:
         for img, sc in zip(images, scores):
             if len(img) > 27:
                 img = img[:27] + "..."
-            print("{:<30}\t{:.1f}/100".format(img, pos(id2score.values(), sc)))
+            print("{:<30}\t{:.1f}/100".format(img, pos(np.array(list(id2score.values())), sc)))
 
 if __name__ == '__main__':
     main()
