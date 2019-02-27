@@ -34,13 +34,9 @@ def load_lines(fp):
 def get_image_feats(images):
     #Extract ResNet features from images
     print("Extracting image features from {} file(s)".format(len(images)))
-    base_model = ResNet50()
-    base_model.trainable = False
-    image_model = Sequential()
-    image_model.add(Model(inputs=base_model.input,
-                          outputs=base_model.get_layer('avg_pool').output))
+    base_model = ResNet50(pooling='avg', include_top=False)
     gen = image_generator(images, 32)
-    feats = image_model.predict_generator(gen, int(np.ceil(len(images) / 32)))
+    feats = base_model.predict_generator(gen, int(np.ceil(len(images) / 32)))
     feats = feats[:len(images),:]
     return feats
     
