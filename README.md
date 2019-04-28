@@ -1,3 +1,5 @@
+[![forthebadge](https://forthebadge.com/images/badges/contains-cat-gifs.svg)](https://forthebadge.com)
+
 ## What's in here?
 
 This repo contains pretrained models that predict relative upvotes on
